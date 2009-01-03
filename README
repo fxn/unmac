@@ -1,4 +1,4 @@
-I just started working on this pet project. The goal is a command-line utility that cleanups Mac stuff in foreign volumes/directories.
+I just started working on this pet project. The goal is a command-line utility that cleanups Mac stuff in foreign file systems.
 
 Motivation is: my ebook reader (iRex DR 1000S) stores files in a FAT16 SD card that ends up with hidden files like "emulated" resource forks and such. I want to tidy it up on a regular basis.
 
