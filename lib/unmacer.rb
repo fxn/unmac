@@ -28,5 +28,11 @@ class Unmacer
     
   def initialize
     self.verbose = false
-  end  
+  end
+
+  def select_emulated_resource_forks(listing)
+    listing.select do |filename|
+      filename =~ /^\._(.*)/ && listing.include?($1)
+    end
+  end
 end
