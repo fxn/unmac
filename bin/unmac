@@ -14,8 +14,8 @@ opts = GetoptLong.new(
   ['--keep-apple-double-orphans', '-o', GetoptLong::NO_ARGUMENT]
 )
 
-unmacer = Unmacer.new
 begin
+  unmacer = Unmacer.new
   opts.each do |opt, val|
     case opt
     when '--help'
