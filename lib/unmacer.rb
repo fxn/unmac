@@ -1,7 +1,7 @@
 require 'fileutils'
 
 class Unmacer
-  attr_accessor :verbose, :keep_orphans
+  attr_accessor :verbose, :keep_apple_double_orphans
   
   def initialize
     self.verbose                   = false
