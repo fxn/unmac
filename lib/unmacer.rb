@@ -1,54 +1,59 @@
 require 'fileutils'
 
 class Unmacer
-  attr_accessor :verbose, :keep_apple_double_orphans
+  attr_accessor :verbose, :keep_trashes, :keep_apple_double_orphans
   
   def initialize
     self.verbose                   = false
+    self.keep_trashes              = false
     self.keep_apple_double_orphans = false
   end
 
-  def unmac!(*directories)
-    directories.each do |directory|
-      Dir.chdir(directory) do
-        delete_all
+  def unmac!(dirnames)
+    dirnames.each do |dirname|
+      unmac_all(dirname)
+      Find.find(dirname) do |f|
+        unmac_arbitrary_folder(f) if File.directory?(f)
       end
     end
   end
 
 private
 
-  def delete_all
-    delete_in_arbitrary_folder
-    delete_in_root_folder
+  def unmac_all(dirname)
+    # Order is important because ".Trashes" has "._.Trashes". Otherwise,
+    # "._.Trashes" could be left as an orphan.
+    unmac_arbitrary_folder(dirname)
+    unmac_root_folder(dirname)
   end
 
-  def delete_in_root_folder
-    delete_spotlight
-    delete_fseventsd
-    delete_trashes
+  def unmac_root_folder(dirname)
+    delete_spotlight(dirname)
+    delete_fseventsd(dirname)
+    delete_trashes(dirname)
   end
   
-  def delete_in_arbitrary_folder
-    delete_macosx
-    delete_ds_store
-    delete_apple_double_hidden_files
+  def unmac_arbitrary_folder(dirname)
+    delete_macosx(dirname)
+    delete_ds_store(dirname)
+    delete_apple_double_hidden_files(dirname)
   end
 
-  def delete(file_or_directory)
-    FileUtils.rm_r(file_or_directory)
+  def delete(parent, file_or_directory)
+    name = File.join(parent, file_or_directory)
+    FileUtils.rm_r(name)
   rescue Errno::ENOENT
-    # ignore
+    # it does not exist, fine.
   else
-    puts "deleted #{file_or_directory}" if verbose
+    puts "deleted #{name}" if verbose
   end
 
   # Spotlight saves all its index-related files in the .Spotlight-V100 directory
   # at the root level of a volume it has indexed.
   #
   # See http://www.thexlab.com/faqs/stopspotlightindex.html.
-  def delete_spotlight
-    delete('.Spotlight-V100')
+  def delete_spotlight(dirname)
+    delete(dirname, '.Spotlight-V100')
   end
 
   # The FSEvents framework has a daemon that dumps events from /dev/fsevents
@@ -56,33 +61,33 @@ private
   # the events are for.
   #
   # See http://arstechnica.com/reviews/os/mac-os-x-10-5.ars/7.
-  def delete_fseventsd
-    delete('.fseventsd')
+  def delete_fseventsd(dirname)
+    delete(dirname, '.fseventsd')
   end
 
   # A volume may have a ".Trashes" folder in the root directory. The Trash in
   # the Dock shows the contents of the ".Trash" folder in your home directory
-  # and the content of all the ".Trashes/user_id" in the rest of volumes.
+  # and the content of all the ".Trashes/uid" in the rest of volumes.
   #
   # See http://discussions.apple.com/thread.jspa?messageID=1145130.
-  def delete_trashes
-    delete('.Trashes')
+  def delete_trashes(dirname)
+    delete(dirname, '.Trashes')
   end
 
   # Apple's builtin Zip archiver stores some metadata in a directory called
   # "__MACOSX".
   #
   # See http://floatingsun.net/2007/02/07/whats-with-__macosx-in-zip-files.
-  def delete_macosx
-    delete('__MACOSX')
+  def delete_macosx(dirname)
+    delete(dirname, '__MACOSX')
   end
 
   # In each directory the ".DS_Store" file stores info about Finder window
   # settings and Spotlight comments of its files.
   #
   # See http://en.wikipedia.org/wiki/.DS_Store.
-  def delete_ds_store
-    delete('.DS_Store')
+  def delete_ds_store(dirname)
+    delete(dirname, '.DS_Store')
   end
 
   # When a file is copied to a volume that does not natively support HFS file
@@ -108,11 +113,14 @@ private
   # selected. The idea is to clean up ghost entries corresponding to files
   # that were deleted in the target volume mounted in a different OS.
   # Otherwise we ensure the corresponding filename exists in +basenames+.
-  def delete_apple_double_hidden_files
-    Dir.foreach('.') do |basename|
-      delete(basename) if basename =~ /\A\._(.*)/ &&
-                          !keep_apple_double_orphans ||
-                          basenames.include?($1)
+  def delete_apple_double_hidden_files(dirname)
+    basenames = Dir.entries(dirname)
+    basenames.select do |basename|
+      basename =~ /\A\._(.*)/ &&
+      !keep_apple_double_orphans ||
+      basenames.include?($1)
+    end.each do |basename|
+      delete(dirname, basename)
     end
   end
 end

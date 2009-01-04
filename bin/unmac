@@ -26,7 +26,9 @@ begin
       unmacer.keep_apple_double_orphans = true
     end
   end
-  unmacer.unmac!
+  puts ARGV.join(', ')
+  exit
+  unmacer.unmac!(ARGV)
 rescue GetoptLong::InvalidOption
   usage and exit 1
 end
