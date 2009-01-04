@@ -30,6 +30,8 @@ class Unmacer
     self.verbose = false
   end
 
+private
+
   def delete!(file_or_directory)
     FileUtils.rm_r(file_or_directory)
   rescue Errno::ENOENT
