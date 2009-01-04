@@ -10,15 +10,13 @@ class Unmacer
 
   def unmac!(*directories)
     directories.each do |directory|
-      unmac_directory(directory)
+      Dir.chdir(directory) do
+        delete_all
+      end
     end
   end
 
 private
-
-  def unmac_directory(directory)
-    # TODO
-  end
 
   def delete_all
     delete_in_arbitrary_folder
@@ -60,6 +58,15 @@ private
   # See http://arstechnica.com/reviews/os/mac-os-x-10-5.ars/7.
   def delete_fseventsd
     delete('.fseventsd')
+  end
+
+  # A volume may have a ".Trashes" folder in the root directory. The Trash in
+  # the Dock shows the contents of the ".Trash" folder in your home directory
+  # and the content of all the ".Trashes/user_id" in the rest of volumes.
+  #
+  # See http://discussions.apple.com/thread.jspa?messageID=1145130.
+  def delete_trashes
+    delete('.Trashes')
   end
 
   # Apple's builtin Zip archiver stores some metadata in a directory called
