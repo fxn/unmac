@@ -40,9 +40,16 @@ private
     puts "deleted #{file_or_directory}" if verbose
   end
 
-  def select_emulated_resource_forks(listing)
-    listing.select do |filename|
-      filename =~ /^\._(.*)/ && listing.include?($1)
+  # Given the listing of a directory in +basenames+ this method selects emulated
+  # resource forks in there.
+  #
+  # The resource fork of file "foo.txt" is emulated in a ghost file "._foo.txt".
+  # This method returns the filenames that look like that. If +include_orphans+
+  # is true any filename that starts with "._" is selected, otherwise we ensure
+  # the corresponding filename exists in +basenames+.
+  def select_emulated_resource_forks(basenames, include_orphans)
+    basenames.select do |basename|
+      basename =~ /\A\._(.*)/ && (include_orphans || basenames.include?($1))
     end
   end
 end
