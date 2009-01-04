@@ -3,7 +3,7 @@ require 'fileutils'
 class Unmacer
   attr_accessor :verbose
   
-  UNMAC_PER_FOLDER = [
+  UNMAC_PER_DIRECTORY = [
     # In each folder the .DS_Store file stores info about Finder window settings
     # and Spotlight comments of its files.
     #
@@ -11,7 +11,7 @@ class Unmacer
     '.DS_Store',
   ]
   
-  UNMAC_IN_ROOT_FOLDER = [
+  UNMAC_IN_ROOT_DIRECTORY = [
     # The FSEvents framework has a daemon that dumps events from /dev/fsevents
     # into log files stored in a .fseventsd directory at the root of the volume
     # the events are for.
