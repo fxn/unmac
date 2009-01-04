@@ -30,6 +30,14 @@ class Unmacer
     self.verbose = false
   end
 
+  def delete!(file_or_directory)
+    FileUtils.rm_r(file_or_directory)
+  rescue Errno::ENOENT
+    # ignore
+  else
+    puts "deleted #{file_or_directory}" if verbose
+  end
+
   def select_emulated_resource_forks(listing)
     listing.select do |filename|
       filename =~ /^\._(.*)/ && listing.include?($1)
