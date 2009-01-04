@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'find'
 
 class Unmacer
   attr_accessor :verbose, :keep_trashes, :keep_apple_double_orphans
