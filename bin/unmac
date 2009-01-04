@@ -2,7 +2,7 @@
 
 require 'getoptlong'
 require 'rubygems'
-require 'unmac'
+require 'unmacer'
 
 def usage
   puts "unmac [-h|--help] [-v|--verbose] [directory ...]"
