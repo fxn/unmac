@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require 'getoptlong'
+require 'rubygems'
+require 'unmac'
+
+def usage
+  puts "unmac [-h|--help] [-v|--verbose] [directory ...]"
+end
+
+opts = GetoptLong.new(
+  ['--help',    '-h', GetoptLong::NO_ARGUMENT],
+  ['--verbose', '-v', GetoptLong::NO_ARGUMENT]
+)
+
+begin
+  opts.each do |opt, val|
+    case opt
+    when '--help'
+      usage and exit
+    when '--verbose'
+      # TODO
+    end
+  end
+rescue GetoptLong::InvalidOption
+  usage and exit 1
+end
