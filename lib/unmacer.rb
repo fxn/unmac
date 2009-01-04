@@ -30,7 +30,7 @@ private
   def unmac_root_folder(dirname)
     delete_spotlight(dirname)
     delete_fseventsd(dirname)
-    delete_trashes(dirname)
+    delete_trashes(dirname) unless keep_trashes
   end
   
   def unmac_arbitrary_folder(dirname)
