@@ -36,8 +36,8 @@ What's deleted:
     * Time Machine relies on a folder called ".fseventsd" in the root directory
       of volumes.
 
-    * A folder called ".Trashes" in the root directory of volumes stores the
-      trash corresponding to that volume.
+    * A folder called ".Trashes" in the root directory of volumes stores their
+      trashes. Those ones are took into account by the Trash in the Dock.
 
     * Some archivers create auxiliary directories called "__MACOSX".
 
