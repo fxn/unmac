@@ -4,6 +4,12 @@ require 'find'
 class Unmacer
   attr_accessor :verbose, :keep_trashes, :keep_apple_double_orphans
   
+  SPOTLIGHT = '.Spotlight-V100'
+  FSEVENTS  = '.fseventsd'
+  TRASHES   = '.Trashes'
+  MACOSX    = '__MACOSX'
+  DSSTORE   = '.DS_Store'
+
   def initialize
     self.verbose                   = false
     self.keep_trashes              = false
@@ -13,8 +19,19 @@ class Unmacer
   def unmac!(dirnames)
     dirnames.each do |dirname|
       unmac_root(dirname)
-      Find.find(dirname) do |f|
+      find_skipping_root(dirname) do |f|
         unmac_folder(f) if File.directory?(f)
+      end
+    end
+  end
+
+  def find_skipping_root(path)
+    root_seen = false
+    Find.find(path) do |f|
+      if !root_seen
+        root_seen = true
+      else
+        yield f
       end
     end
   end
@@ -25,7 +42,7 @@ private
     unmac_root_folder(dirname)
   end
 
-  def unmac_root_folder(dirname)
+  def unmac_root(dirname)
     # Order is important because ".Trashes" has "._.Trashes". Otherwise,
     # "._.Trashes" could be left as an orphan.
     unmac_folder(dirname)
@@ -54,7 +71,7 @@ private
   #
   # See http://www.thexlab.com/faqs/stopspotlightindex.html.
   def delete_spotlight(dirname)
-    delete(dirname, '.Spotlight-V100')
+    delete(dirname, SPOTLIGHT)
   end
 
   # The FSEvents framework has a daemon that dumps events from /dev/fsevents
@@ -63,7 +80,7 @@ private
   #
   # See http://arstechnica.com/reviews/os/mac-os-x-10-5.ars/7.
   def delete_fseventsd(dirname)
-    delete(dirname, '.fseventsd')
+    delete(dirname, FSEVENTS)
   end
 
   # A volume may have a ".Trashes" folder in the root directory. The Trash in
@@ -72,7 +89,7 @@ private
   #
   # See http://discussions.apple.com/thread.jspa?messageID=1145130.
   def delete_trashes(dirname)
-    delete(dirname, '.Trashes')
+    delete(dirname, TRASHES)
   end
 
   # Apple's builtin Zip archiver stores some metadata in a directory called
@@ -80,7 +97,7 @@ private
   #
   # See http://floatingsun.net/2007/02/07/whats-with-__macosx-in-zip-files.
   def delete_macosx(dirname)
-    delete(dirname, '__MACOSX')
+    delete(dirname, MACOSX)
   end
 
   # In each directory the ".DS_Store" file stores info about Finder window
@@ -88,7 +105,7 @@ private
   #
   # See http://en.wikipedia.org/wiki/.DS_Store.
   def delete_ds_store(dirname)
-    delete(dirname, '.DS_Store')
+    delete(dirname, DSSTORE)
   end
 
   # When a file is copied to a volume that does not natively support HFS file
