@@ -90,13 +90,13 @@ class TestUnmacer < Test::Unit::TestCase
     assert read_struct.empty?    
   end
   
-  def test_apple_double
+  def test_apple_double_with_pair
     create_struct([], %w(foo.txt ._foo.txt))
     unmac!
     assert_equal %w(foo.txt), read_struct
   end
 
-  def test_apple_double
+  def test_apple_double_with_orphan
     create_struct([], %w(._foo.txt))
     unmac!
     assert read_struct.empty?
