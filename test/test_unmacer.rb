@@ -97,13 +97,13 @@ class TestUnmacer < Test::Unit::TestCase
   end
 
   def test_apple_double_with_orphan
-    create_struct([], %w(._foo.txt))
+    create_struct([], '._foo.txt')
     unmac!
     assert read_struct.empty?
   end
 
   def test_assert_keep_apple_double_orphans
-    create_struct([], %w(._foo.txt))
+    create_struct([], '._foo.txt')
     @unmacer.keep_apple_double_orphans = true
     unmac!
     assert_equal %w(._foo.txt), read_struct    
