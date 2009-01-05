@@ -65,6 +65,7 @@ opts = GetoptLong.new(
   ['--keep-spotlight',            '-s', GetoptLong::NO_ARGUMENT],
   ['--keep-fsevents',             '-f', GetoptLong::NO_ARGUMENT],
   ['--keep-trashes',              '-t', GetoptLong::NO_ARGUMENT],
+  ['--keep-macosx',               '-m', GetoptLong::NO_ARGUMENT],
   ['--keep-apple-double-orphans', '-o', GetoptLong::NO_ARGUMENT]
 )
 
