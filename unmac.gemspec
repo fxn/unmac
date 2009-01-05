@@ -8,6 +8,11 @@ Gem::Specification.new do |spec|
   spec.email             = 'fxn@hashref.com'
   spec.rubyforge_project = 'unmac'
 
+  spec.test_files = %w(
+    test/test_unmacer.rb
+    test/test_unmac.rb    
+  )
+
   spec.files = %w(
     unmac.gemspec
     Rakefile
@@ -15,9 +20,5 @@ Gem::Specification.new do |spec|
     MIT-LICENSE
     bin/unmac
     lib/unmacer.rb
-    test/test_unmacer.rb
-    test/test_unmac.rb
-  )
-
-  spec.test_files = Dir.glob('test/test_*.rb')
+  ) + spec.test_files
 end
