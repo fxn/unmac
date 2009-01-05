@@ -7,7 +7,7 @@ class Unmacer
                 :keep_fsevents,
                 :keep_trashes,
                 :keep_apple_double_orphans
-  
+
   SPOTLIGHT = '.Spotlight-V100'
   FSEVENTS  = '.fseventsd'
   TRASHES   = '.Trashes'
@@ -56,7 +56,7 @@ private
     delete_fseventsd(dirname)
     delete_trashes(dirname) unless keep_trashes
   end
-  
+
   def unmac_folder(dirname)
     delete_macosx(dirname)
     delete_ds_store(dirname)
@@ -120,7 +120,7 @@ private
   # is stored in a second file in AppleDouble format, with a name that starts
   # with "._". So if the original file is called "foo.txt" you get a spurious
   # ghost file called "._foo.txt".
-  # 
+  #
   # If you drag & drop a file onto a Windows partition, or you unpack a tarball
   # on Linux that was built with Apple's tar(1) archiver you'll get that extra
   # stuff. Reason is if the tarball is extracted into another Mac the metadata

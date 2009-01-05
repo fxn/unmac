@@ -11,31 +11,31 @@ class TestUnmacer < Test::Unit::TestCase
   def in_test_dir
     Dir.chdir(TEST_DIR) { yield }
   end
-  
+
   def in_tmp_dir
     Dir.chdir(TMP_DIR) { yield }
   end
-  
+
   def setup
     in_test_dir { Dir.mkdir('tmp') }
     @unmacer = Unmacer.new
   end
-  
+
   def teardown
     in_test_dir { FileUtils.rm_r('tmp') }
   end
-  
+
   def unmac!
     @unmacer.unmac!(TMP_DIR)
   end
-  
+
   def create_struct(dirnames=[], fnames=[])
     in_tmp_dir do
       FileUtils.mkdir_p([*dirnames])
       FileUtils.touch([*fnames])
     end
   end
-  
+
   def read_struct
     entries = []
     in_tmp_dir do
@@ -46,7 +46,7 @@ class TestUnmacer < Test::Unit::TestCase
     end
     entries
   end
-  
+
   def test_an_empty_directory_should_remain_empty
     create_struct
     unmac!
@@ -65,7 +65,7 @@ class TestUnmacer < Test::Unit::TestCase
     unmac!
     assert [Unmacer::SPOTLIGHT], read_struct
   end
-  
+
   def test_fsevents
     create_struct(Unmacer::FSEVENTS)
     unmac!
@@ -82,7 +82,7 @@ class TestUnmacer < Test::Unit::TestCase
   def test_trashes
     create_struct(Unmacer::TRASHES)
     unmac!
-    assert read_struct.empty?    
+    assert read_struct.empty?
   end
 
   def test_keep_trashes
@@ -95,15 +95,15 @@ class TestUnmacer < Test::Unit::TestCase
   def test_macosx
     create_struct(Unmacer::MACOSX)
     unmac!
-    assert read_struct.empty?    
+    assert read_struct.empty?
   end
-  
+
   def test_dsstore
     create_struct([], Unmacer::DSSTORE)
     unmac!
-    assert read_struct.empty?    
+    assert read_struct.empty?
   end
-  
+
   def test_apple_double_with_pair
     create_struct([], %w(foo.txt ._foo.txt))
     unmac!
@@ -120,6 +120,6 @@ class TestUnmacer < Test::Unit::TestCase
     create_struct([], '._foo.txt')
     @unmacer.keep_apple_double_orphans = true
     unmac!
-    assert_equal %w(._foo.txt), read_struct    
+    assert_equal %w(._foo.txt), read_struct
   end
 end
