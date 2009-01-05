@@ -178,7 +178,8 @@ class TestUnmac < Test::Unit::TestCase
     $> = StringIO.open(buf, 'w')
     call_unmac('-h')
     $> = $stdout
-    assert_match /^Usage:/, buf
+    assert_match /^unmac\b/, buf
+    assert_match /^Usage\b/, buf
     assert ARGV.empty?
   end
 end
