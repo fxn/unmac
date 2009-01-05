@@ -37,7 +37,7 @@ What's deleted:
       of volumes.
 
     * A folder called ".Trashes" in the root directory of volumes stores their
-      trashes. Those ones are took into account by the Trash in the Dock.
+      trashes. Those ones are taken into account by the Trash in the Dock.
 
     * Some archivers create auxiliary directories called "__MACOSX".
 
