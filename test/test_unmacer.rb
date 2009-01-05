@@ -60,6 +60,13 @@ class TestUnmacer < Test::Unit::TestCase
     assert read_struct.empty?
   end
 
+  def test_spotlight_ignored_if_not_in_root
+    fake = File.join('dummy', Unmacer::SPOTLIGHT)
+    create_struct(fake)
+    unmac!
+    assert read_struct.include?(fake)
+  end
+
   def test_keep_spotlight
     create_struct(Unmacer::SPOTLIGHT)
     @unmacer.keep_spotlight = true
@@ -73,6 +80,13 @@ class TestUnmacer < Test::Unit::TestCase
     assert read_struct.empty?
   end
 
+  def test_fsevents_ignored_if_not_in_root
+    fake = File.join('dummy', Unmacer::FSEVENTS)
+    create_struct(fake)
+    unmac!
+    assert read_struct.include?(fake)
+  end
+
   def test_keep_fsevents
     create_struct(Unmacer::FSEVENTS)
     @unmacer.keep_fsevents = true
@@ -84,6 +98,13 @@ class TestUnmacer < Test::Unit::TestCase
     create_struct(Unmacer::TRASHES)
     unmac!
     assert read_struct.empty?
+  end
+
+  def test_trashes_ignored_if_not_in_root
+    fake = File.join('dummy', Unmacer::TRASHES)
+    create_struct(fake)
+    unmac!
+    assert read_struct.include?(fake)
   end
 
   def test_keep_trashes
@@ -145,10 +166,37 @@ class TestUnmacer < Test::Unit::TestCase
     assert ['._foo.txt'], read_struct
   end
 
-  def test_assert_keep_apple_double_orphans
+  def test_keep_apple_double_orphans
     create_struct([], '._foo.txt')
     @unmacer.keep_apple_double_orphans = true
     unmac!
     assert_equal %w(._foo.txt), read_struct
+  end
+
+  def test_a_handful_of_files
+    dummy  = 'dummy'
+    dummy2 = File.join(dummy, 'dummy2')
+    ghost  = File.join(dummy, '._ghost')
+    remain = File.join(dummy2, 'should_remain')
+    create_struct([
+      Unmacer::SPOTLIGHT,
+      Unmacer::FSEVENTS,
+      Unmacer::TRASHES,
+      Unmacer::MACOSX,
+      dummy,
+      dummy2
+    ], [
+      Unmacer::DSSTORE,
+      File.join(dummy,  Unmacer::DSSTORE),
+      File.join(dummy2, Unmacer::DSSTORE),
+      File.join(dummy,  Unmacer::MACOSX),
+      File.join(dummy2, Unmacer::MACOSX),
+      'foo.txt',
+      '._foo.txt',
+      ghost,
+      remain
+    ])
+    unmac!
+    assert_equal Set.new(['foo.txt', dummy, dummy2, remain]), Set.new(read_struct)
   end
 end
