@@ -70,9 +70,11 @@ opts = GetoptLong.new(
   ['--keep-macosx',               '-m', GetoptLong::NO_ARGUMENT],
   ['--keep-dsstore',              '-r', GetoptLong::NO_ARGUMENT],
   ['--keep-apple-double',         '-d', GetoptLong::NO_ARGUMENT],
-  ['--keep-apple-double-orphans', '-o', GetoptLong::NO_ARGUMENT]
+  ['--keep-apple-double-orphans', '-o', GetoptLong::NO_ARGUMENT],
+  ['--test',                            GetoptLong::NO_ARGUMENT]
 )
 
+test = false
 begin
   unmacer = Unmacer.new
   opts.each do |opt, val|
@@ -83,10 +85,15 @@ begin
       unmacer.verbose = true
     when /\A--(keep-.*)/
       flag = $1.gsub('-', '_')
-      unmacer.send(flag, true)
+      unmacer.send("#{flag}=", true)
+    when '--test'
+      test = true
     end
   end
-  unmacer.unmac!(ARGV)
+  unmacer.unmac!(ARGV) unless test
 rescue GetoptLong::InvalidOption
   usage and exit 1
 end
+
+# The test suite for this file expects the unmacer to be the last expression.
+unmacer
