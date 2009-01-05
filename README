@@ -18,7 +18,7 @@ Description:
   When a Mac copies files to volumes that have a different file system it adds
   some auxiliary files that represent different kinds of metadata. This typically
   happens with memory sticks, network drives, SD cards, etc. Mac archivers like
-  zip(1) add special files as well, like "#{Unmacer::MACOSX}", you'll see them
+  zip(1) add special files as well, like "__MACOSX", you'll see them
   for example if you extract a Zip file like that on Windows.
 
   The purpose of these special files is to let another Mac rebuild the metadata
