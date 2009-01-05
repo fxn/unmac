@@ -81,7 +81,7 @@ begin
       usage and exit
     when '--verbose'
       unmacer.verbose = true
-    when /\A--(keep-)/
+    when /\A--(keep-.*)/
       flag = $1.gsub('-', '_')
       unmacer.send(flag, true)
     end
