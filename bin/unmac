@@ -28,7 +28,7 @@ Description:
   happens with memory sticks, network drives, SD cards, etc. Mac archivers like
   zip(1) add special files as well, like "#{Unmacer::MACOSX}", you'll see them
   for example if you extract a Zip file like that on Windows.
-  
+
   The purpose of these special files is to let another Mac rebuild the metadata
   from them, Spotlight integration, etc. But if you are not interested in these
   features your directory or volume just gets cluttered. This utility removes
@@ -37,7 +37,7 @@ Description:
 What's deleted:
   This is just a summary, for more detailed explanations and pointers see the
   comments in unmacer.rb:
-  
+
     * Spotlight leaves a folder called "#{Unmacer::SPOTLIGHT}" in the root directory
       of volumes.
 
@@ -51,11 +51,11 @@ What's deleted:
 
     * Finder and Spotlight data related to each folder gets stored in an
       extra file called "#{Unmacer::DSSTORE}".
-    
+
     * For each file "foo.txt", its resource fork and some additional stuff
       are stored in an accompaining ghost file called "._foo.txt". The pattern
       is to prepend "._" to the original file name.
-  
+
   Some stuff is only found in the root folder of volumes, unmac looks for them
   in any directory you pass as argument, but not on their subdirectories.
 USAGE

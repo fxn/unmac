@@ -38,7 +38,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
-      assert_equal %w(dummy), ARGV    
+      assert_equal %w(dummy), ARGV
     end
   end
 
@@ -53,7 +53,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
-      assert_equal %w(dummy), ARGV    
+      assert_equal %w(dummy), ARGV
     end
   end
 
@@ -68,7 +68,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
-      assert_equal %w(dummy), ARGV    
+      assert_equal %w(dummy), ARGV
     end
   end
 
@@ -83,7 +83,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
-      assert_equal %w(dummy), ARGV    
+      assert_equal %w(dummy), ARGV
     end
   end
 
@@ -98,7 +98,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
-      assert_equal %w(dummy), ARGV    
+      assert_equal %w(dummy), ARGV
     end
   end
 
@@ -113,7 +113,7 @@ class TestUnmac < Test::Unit::TestCase
       assert unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
-      assert_equal %w(dummy), ARGV    
+      assert_equal %w(dummy), ARGV
     end
   end
 
@@ -128,7 +128,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
-      assert_equal %w(dummy), ARGV    
+      assert_equal %w(dummy), ARGV
     end
   end
 
@@ -143,7 +143,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert unmacer.keep_apple_double_orphans
-      assert_equal %w(dummy), ARGV    
+      assert_equal %w(dummy), ARGV
     end
   end
 
@@ -157,7 +157,7 @@ class TestUnmac < Test::Unit::TestCase
     assert !unmacer.keep_dsstore
     assert unmacer.keep_apple_double
     assert !unmacer.keep_apple_double_orphans
-    assert_equal %w(dummy), ARGV        
+    assert_equal %w(dummy), ARGV
   end
 
   def test_mix_2
@@ -170,7 +170,7 @@ class TestUnmac < Test::Unit::TestCase
     assert unmacer.keep_dsstore
     assert !unmacer.keep_apple_double
     assert unmacer.keep_apple_double_orphans
-    assert_equal %w(dummy), ARGV        
+    assert_equal %w(dummy), ARGV
   end
 
   def test_help
