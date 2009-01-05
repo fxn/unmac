@@ -22,7 +22,7 @@ def usage
     volumes that have a different file system it adds some files that
     represent different kinds of metadata. This typically happens with USB
     memory sticks, network drives, SD cards, etc. Mac archivers like zip(1)
-    add special files as well, like "__MACOSX", you'll see them for example if
+    add special files as well, like "#{Unmacer::MACOSX}", you'll see them for example if
     you extract a Zip file like that on Windows.
     
     The purpose of these special files is to let another Mac rebuild the metadata
@@ -33,19 +33,19 @@ def usage
     This is just a summary, for more detailed explanations and pointers see the
     comments in the source code of unmacer.rb:
     
-      * Spotlight leaves a folder called ".Spotlight-V100" in the root directory
+      * Spotlight leaves a folder called "#{Unmacer::SPOTLIGHT}" in the root directory
         of volumes.
 
-      * Time Machine relies on a folder called ".fseventsd" in the root directory
+      * Time Machine relies on a folder called "#{Unmacer::FSEVENTS}" in the root directory
         of volumes.
 
-      * A folder called ".Trashes" in the root directory of volumes stores the
+      * A folder called "#{Unmacer::TRASHES}" in the root directory of volumes stores the
         trash corresponding to that volume.
 
-      * Some archivers create auxiliary directories called "__MACOSX".
+      * Some archivers create auxiliary directories called "#{Unmacer::MACOSX}".
 
       * Finder and Spotlight data related to each folder gets stored in an
-        extra file called ".DS_Store".
+        extra file called "#{Unmacer::DSSTORE}".
       
       * For each file "foo.txt", its resource fork and some additional stuff
         are stored in an accompaining ghost file called "._foo.txt". The pattern
