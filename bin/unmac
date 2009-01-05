@@ -15,6 +15,7 @@ Options:
   -h, --help                       Print this help
   -v, --verbose                    Show processing
   -s, --keep-spotlight             Do not delete Spotlight data
+  -f, --keep-fsevents              Do not delete Time Machine stuff
   -t, --keep-trashes               Do not delete volume trashes
   -o, --keep-apple-double-orphans  Delete "._foo.txt" only if "foo.txt" exists
 
@@ -61,6 +62,7 @@ opts = GetoptLong.new(
   ['--help',                      '-h', GetoptLong::NO_ARGUMENT],
   ['--verbose',                   '-v', GetoptLong::NO_ARGUMENT],
   ['--keep-spotlight',            '-s', GetoptLong::NO_ARGUMENT],
+  ['--keep-fsevents',             '-f', GetoptLong::NO_ARGUMENT],
   ['--keep-trashes',              '-t', GetoptLong::NO_ARGUMENT],
   ['--keep-apple-double-orphans', '-o', GetoptLong::NO_ARGUMENT]
 )
@@ -75,6 +77,8 @@ begin
       unmacer.verbose = true
     when '--keep-spotlight'
       unmacer.keep_spotlight = true
+    when '--keep-fsevents'
+      unmacer.keep_fsevents = true
     when '--keep-trashes'
       unmacer.keep_trashes = true
     when '--keep-apple-double-orphans'

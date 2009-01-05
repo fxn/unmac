@@ -71,7 +71,14 @@ class TestUnmacer < Test::Unit::TestCase
     unmac!
     assert read_struct.empty?
   end
-  
+
+  def test_keep_fsevents
+    create_struct(Unmacer::FSEVENTS)
+    @unmacer.keep_fsevents = true
+    unmac!
+    assert [Unmacer::FSEVENTS], read_struct
+  end
+
   def test_trashes
     create_struct(Unmacer::TRASHES)
     unmac!

@@ -4,6 +4,7 @@ require 'find'
 class Unmacer
   attr_accessor :verbose,
                 :keep_spotlight,
+                :keep_fsevents,
                 :keep_trashes,
                 :keep_apple_double_orphans
   
@@ -16,6 +17,7 @@ class Unmacer
   def initialize
     self.verbose                   = false
     self.keep_spotlight            = false
+    self.keep_fsevents             = false
     self.keep_trashes              = false
     self.keep_apple_double_orphans = false
   end
