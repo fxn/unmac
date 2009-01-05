@@ -9,7 +9,7 @@ def usage
 unmac -- Delete spurious Mac files under a directory or volume
 
 Usage:
-  unmac [-h|--help] [-v|--verbose] [-t|--keep-trashes] [-o|--keep-apple-double-orphans] directory ...
+  unmac [OPTIONS] directory ...
 
 Options:
   -h, --help                       Print this help
@@ -17,6 +17,7 @@ Options:
   -s, --keep-spotlight             Do not delete Spotlight data
   -f, --keep-fsevents              Do not delete Time Machine stuff
   -t, --keep-trashes               Do not delete volume trashes
+  -m, --keep-macosx                Do not delete __MACOSX directories
   -o, --keep-apple-double-orphans  Delete "._foo.txt" only if "foo.txt" exists
 
 Description:
@@ -81,6 +82,8 @@ begin
       unmacer.keep_fsevents = true
     when '--keep-trashes'
       unmacer.keep_trashes = true
+    when '--keep-macosx'
+      unmacer.keep_macosx = true
     when '--keep-apple-double-orphans'
       unmacer.keep_apple_double_orphans = true
     end

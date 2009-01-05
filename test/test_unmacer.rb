@@ -98,6 +98,13 @@ class TestUnmacer < Test::Unit::TestCase
     assert read_struct.empty?
   end
 
+  def test_keep_macosx
+    create_struct(Unmacer::MACOSX)
+    @unmacer.keep_macosx
+    unmac!
+    assert [Unmacer::MACOSX], read_struct
+  end
+
   def test_dsstore
     create_struct([], Unmacer::DSSTORE)
     unmac!

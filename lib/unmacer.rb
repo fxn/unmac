@@ -6,6 +6,7 @@ class Unmacer
                 :keep_spotlight,
                 :keep_fsevents,
                 :keep_trashes,
+                :keep_macosx,
                 :keep_apple_double_orphans
 
   SPOTLIGHT = '.Spotlight-V100'
@@ -19,6 +20,7 @@ class Unmacer
     self.keep_spotlight            = false
     self.keep_fsevents             = false
     self.keep_trashes              = false
+    self.keep_macosx               = false
     self.keep_apple_double_orphans = false
   end
 
@@ -58,7 +60,7 @@ private
   end
 
   def unmac_folder(dirname)
-    delete_macosx(dirname)
+    delete_macosx(dirname) unless keep_macosx
     delete_ds_store(dirname)
     delete_apple_double(dirname)
   end
