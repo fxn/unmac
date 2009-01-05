@@ -36,7 +36,7 @@ Description:
 
 What's deleted:
   This is just a summary, for more detailed explanations and pointers see the
-  comments in the source code of unmacer.rb:
+  comments in unmacer.rb:
   
     * Spotlight leaves a folder called "#{Unmacer::SPOTLIGHT}" in the root directory
       of volumes.
