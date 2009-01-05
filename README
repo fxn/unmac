@@ -50,3 +50,18 @@ What's deleted:
   
   Some stuff is only found in the root folder of volumes, unmac looks for them
   in any directory you pass as argument, but not on their subdirectories.
+
+Installation:
+  unmac is distributed as a Ruby gem. Once you have Ruby and RubyGems installed
+  execute
+  
+    gem sources -a http://gems.github.com # you need this only once
+    gem install fxn-unmac
+    
+  This program is portable.
+
+License:
+  See the MIT-LICENSE file included in the distribution.
+
+Copyright:
+  Copyright (C) 2009 Xavier Noria
