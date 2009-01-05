@@ -1,7 +1,50 @@
-I just started working on this pet project. The goal is a command-line utility that cleanups Mac stuff in foreign file systems.
+************* NOT YET RELEASED, NOT TESTED, WORK IN PROGRESS *************
 
-Motivation is: my ebook reader (iRex DR 1000S) stores files in a FAT16 SD card that ends up with hidden files like "emulated" resource forks and such. I want to tidy it up on a regular basis.
 
-There's an application called "Hidden Cleaner" that supposedly does this, but it didn't really work for me.
+unmac -- Delete spurious Mac files under a directory or volume
 
-More to come (hopefully).
+Usage:
+  unmac [-h|--help] [-v|--verbose] [-t|--keep-trashes] [-o|--keep-apple-double-orphans] directory ...
+
+Options:
+  -h, --help                       Print this help
+  -v, --verbose                    Show processing
+  -t, --keep-trashes               Do not delete volume trash, if any
+  -o, --keep-apple-double-orphans  Delete "._foo.txt" only if "foo.txt" exists
+
+Description:
+  The HFS file system is richer than others. When the Mac copies files to
+  volumes that have a different file system it adds some files that
+  represent different kinds of metadata. This typically happens with USB
+  memory sticks, network drives, SD cards, etc. Mac archivers like zip(1)
+  add special files as well, like "__MACOSX", you'll see them for example if
+  you extract a Zip file like that on Windows.
+  
+  The purpose of these special files is to let another Mac rebuild the metadata
+  from them. But if you are not interested in this feature your directory or
+  volume just gets cluttered. This utility cleans it.
+
+What's deleted:
+  This is just a summary, for more detailed explanations and pointers see the
+  comments in the source code of unmacer.rb:
+  
+    * Spotlight leaves a folder called ".Spotlight-V100" in the root directory
+      of volumes.
+
+    * Time Machine relies on a folder called ".fseventsd" in the root directory
+      of volumes.
+
+    * A folder called ".Trashes" in the root directory of volumes stores the
+      trash corresponding to that volume.
+
+    * Some archivers create auxiliary directories called "__MACOSX".
+
+    * Finder and Spotlight data related to each folder gets stored in an
+      extra file called ".DS_Store".
+    
+    * For each file "foo.txt", its resource fork and some additional stuff
+      are stored in an accompaining ghost file called "._foo.txt". The pattern
+      is to prepend "._" to the original file name.
+  
+  Some stuff is only found in the root folder of volumes, unmac looks for them
+  in any directory you pass as argument, but not on their subdirectories.

@@ -12,9 +12,9 @@ class Unmacer
 
   def unmac!(dirnames)
     dirnames.each do |dirname|
-      unmac_all(dirname)
+      unmac_root(dirname)
       Find.find(dirname) do |f|
-        unmac_arbitrary_folder(f) if File.directory?(f)
+        unmac_folder(f) if File.directory?(f)
       end
     end
   end
@@ -22,19 +22,19 @@ class Unmacer
 private
 
   def unmac_all(dirname)
-    # Order is important because ".Trashes" has "._.Trashes". Otherwise,
-    # "._.Trashes" could be left as an orphan.
-    unmac_arbitrary_folder(dirname)
     unmac_root_folder(dirname)
   end
 
   def unmac_root_folder(dirname)
+    # Order is important because ".Trashes" has "._.Trashes". Otherwise,
+    # "._.Trashes" could be left as an orphan.
+    unmac_folder(dirname)
     delete_spotlight(dirname)
     delete_fseventsd(dirname)
     delete_trashes(dirname) unless keep_trashes
   end
   
-  def unmac_arbitrary_folder(dirname)
+  def unmac_folder(dirname)
     delete_macosx(dirname)
     delete_ds_store(dirname)
     delete_apple_double(dirname)
