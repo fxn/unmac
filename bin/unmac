@@ -17,8 +17,9 @@ Options:
   -s, --keep-spotlight             Do not delete Spotlight data
   -f, --keep-fsevents              Do not delete Time Machine stuff
   -t, --keep-trashes               Do not delete volume trashes
-  -m, --keep-macosx                Do not delete __MACOSX directories
-  -d, --keep-apple-double          Do not delete ._ ghost files
+  -m, --keep-macosx                Do not delete "__MACOSX" directories
+  -r, --keep-dsstore               Do not delete ".DS_Store" directories
+  -d, --keep-apple-double          Do not delete "._*" ghost files
   -o, --keep-apple-double-orphans  Delete "._foo.txt" only if "foo.txt" exists
 
 Description:
@@ -67,6 +68,7 @@ opts = GetoptLong.new(
   ['--keep-fsevents',             '-f', GetoptLong::NO_ARGUMENT],
   ['--keep-trashes',              '-t', GetoptLong::NO_ARGUMENT],
   ['--keep-macosx',               '-m', GetoptLong::NO_ARGUMENT],
+  ['--keep-dsstore',              '-r', GetoptLong::NO_ARGUMENT],
   ['--keep-apple-double',         '-d', GetoptLong::NO_ARGUMENT],
   ['--keep-apple-double-orphans', '-o', GetoptLong::NO_ARGUMENT]
 )
@@ -79,18 +81,9 @@ begin
       usage and exit
     when '--verbose'
       unmacer.verbose = true
-    when '--keep-spotlight'
-      unmacer.keep_spotlight = true
-    when '--keep-fsevents'
-      unmacer.keep_fsevents = true
-    when '--keep-trashes'
-      unmacer.keep_trashes = true
-    when '--keep-macosx'
-      unmacer.keep_macosx = true
-    when '--keep-apple-double'
-      unmacer.keep_apple_double = true
-    when '--keep-apple-double-orphans'
-      unmacer.keep_apple_double_orphans = true
+    when /\A--(keep-)/
+      flag = $1.gsub('-', '_')
+      unmacer.send(flag, true)
     end
   end
   unmacer.unmac!(ARGV)

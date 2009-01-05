@@ -7,6 +7,7 @@ class Unmacer
                 :keep_fsevents,
                 :keep_trashes,
                 :keep_macosx,
+                :keep_dsstore,
                 :keep_apple_double,
                 :keep_apple_double_orphans
 
@@ -22,6 +23,7 @@ class Unmacer
     self.keep_fsevents             = false
     self.keep_trashes              = false
     self.keep_macosx               = false
+    self.keep_dsstore              = false
     self.keep_apple_double         = false
     self.keep_apple_double_orphans = false
   end
@@ -57,13 +59,13 @@ private
     # "._.Trashes" could be left as an orphan.
     unmac_folder(dirname)
     delete_spotlight(dirname) unless keep_spotlight
-    delete_fseventsd(dirname)
+    delete_fsevents(dirname) unless keep_fsevents
     delete_trashes(dirname) unless keep_trashes
   end
 
   def unmac_folder(dirname)
     delete_macosx(dirname) unless keep_macosx
-    delete_ds_store(dirname)
+    delete_dsstore(dirname) unless keep_dsstore
     delete_apple_double(dirname) unless keep_apple_double
   end
 
@@ -89,7 +91,7 @@ private
   # the events are for.
   #
   # See http://arstechnica.com/reviews/os/mac-os-x-10-5.ars/7.
-  def delete_fseventsd(dirname)
+  def delete_fsevents(dirname)
     delete(dirname, FSEVENTS)
   end
 
@@ -114,7 +116,7 @@ private
   # settings and Spotlight comments of its files.
   #
   # See http://en.wikipedia.org/wiki/.DS_Store.
-  def delete_ds_store(dirname)
+  def delete_dsstore(dirname)
     delete(dirname, DSSTORE)
   end
 

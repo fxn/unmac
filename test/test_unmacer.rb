@@ -77,7 +77,7 @@ class TestUnmacer < Test::Unit::TestCase
     create_struct(Unmacer::FSEVENTS)
     @unmacer.keep_fsevents = true
     unmac!
-    assert [Unmacer::FSEVENTS], read_struct
+    assert_equal [Unmacer::FSEVENTS], read_struct
   end
 
   def test_trashes
@@ -101,15 +101,22 @@ class TestUnmacer < Test::Unit::TestCase
 
   def test_keep_macosx
     create_struct(Unmacer::MACOSX)
-    @unmacer.keep_macosx
+    @unmacer.keep_macosx = true
     unmac!
-    assert [Unmacer::MACOSX], read_struct
+    assert_equal [Unmacer::MACOSX], read_struct
   end
 
   def test_dsstore
     create_struct([], Unmacer::DSSTORE)
     unmac!
     assert read_struct.empty?
+  end
+
+  def test_keep_dsstore
+    create_struct([], Unmacer::DSSTORE)
+    @unmacer.keep_dsstore = true
+    unmac!
+    assert_equal [Unmacer::DSSTORE], read_struct
   end
 
   def test_apple_double_with_pair
