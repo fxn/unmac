@@ -2,7 +2,10 @@ require 'fileutils'
 require 'find'
 
 class Unmacer
-  attr_accessor :verbose, :keep_trashes, :keep_apple_double_orphans
+  attr_accessor :verbose,
+                :keep_spotlight,
+                :keep_trashes,
+                :keep_apple_double_orphans
   
   SPOTLIGHT = '.Spotlight-V100'
   FSEVENTS  = '.fseventsd'
@@ -12,6 +15,7 @@ class Unmacer
 
   def initialize
     self.verbose                   = false
+    self.keep_spotlight            = false
     self.keep_trashes              = false
     self.keep_apple_double_orphans = false
   end
@@ -46,7 +50,7 @@ private
     # Order is important because ".Trashes" has "._.Trashes". Otherwise,
     # "._.Trashes" could be left as an orphan.
     unmac_folder(dirname)
-    delete_spotlight(dirname)
+    delete_spotlight(dirname) unless keep_spotlight
     delete_fseventsd(dirname)
     delete_trashes(dirname) unless keep_trashes
   end

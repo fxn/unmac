@@ -58,6 +58,13 @@ class TestUnmacer < Test::Unit::TestCase
     unmac!
     assert read_struct.empty?
   end
+
+  def test_keep_spotlight
+    create_struct(Unmacer::SPOTLIGHT)
+    @unmacer.keep_spotlight = true
+    unmac!
+    assert [Unmacer::SPOTLIGHT], read_struct
+  end
   
   def test_fsevents
     create_struct(Unmacer::FSEVENTS)

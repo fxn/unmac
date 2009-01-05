@@ -14,7 +14,8 @@ Usage:
 Options:
   -h, --help                       Print this help
   -v, --verbose                    Show processing
-  -t, --keep-trashes               Do not delete volume trash, if any
+  -s, --keep-spotlight             Do not delete Spotlight data
+  -t, --keep-trashes               Do not delete volume trashes
   -o, --keep-apple-double-orphans  Delete "._foo.txt" only if "foo.txt" exists
 
 Description:
@@ -59,6 +60,7 @@ end
 opts = GetoptLong.new(
   ['--help',                      '-h', GetoptLong::NO_ARGUMENT],
   ['--verbose',                   '-v', GetoptLong::NO_ARGUMENT],
+  ['--keep-spotlight',            '-s', GetoptLong::NO_ARGUMENT],
   ['--keep-trashes',              '-t', GetoptLong::NO_ARGUMENT],
   ['--keep-apple-double-orphans', '-o', GetoptLong::NO_ARGUMENT]
 )
@@ -71,6 +73,8 @@ begin
       usage and exit
     when '--verbose'
       unmacer.verbose = true
+    when '--keep-spotlight'
+      unmacer.keep_spotlight = true
     when '--keep-trashes'
       unmacer.keep_trashes = true
     when '--keep-apple-double-orphans'
