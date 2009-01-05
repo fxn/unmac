@@ -1,6 +1,7 @@
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'fileutils'
+require 'set'
 require 'unmacer'
 require 'test/unit'
 
@@ -115,6 +116,13 @@ class TestUnmacer < Test::Unit::TestCase
     create_struct([], %w(foo.txt ._foo.txt))
     unmac!
     assert_equal %w(foo.txt), read_struct
+  end
+
+  def test_keep_apple_double_with_pair
+    create_struct([], %w(foo.txt ._foo.txt))
+    @unmacer.keep_apple_double = true
+    unmac!
+    assert_equal Set.new(%w(foo.txt ._foo.txt)), Set.new(read_struct)
   end
 
   def test_apple_double_with_orphan

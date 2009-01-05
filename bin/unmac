@@ -18,6 +18,7 @@ Options:
   -f, --keep-fsevents              Do not delete Time Machine stuff
   -t, --keep-trashes               Do not delete volume trashes
   -m, --keep-macosx                Do not delete __MACOSX directories
+  -d, --keep-apple-double          Do not delete ._ ghost files
   -o, --keep-apple-double-orphans  Delete "._foo.txt" only if "foo.txt" exists
 
 Description:
@@ -66,6 +67,7 @@ opts = GetoptLong.new(
   ['--keep-fsevents',             '-f', GetoptLong::NO_ARGUMENT],
   ['--keep-trashes',              '-t', GetoptLong::NO_ARGUMENT],
   ['--keep-macosx',               '-m', GetoptLong::NO_ARGUMENT],
+  ['--keep-apple-double',         '-d', GetoptLong::NO_ARGUMENT],
   ['--keep-apple-double-orphans', '-o', GetoptLong::NO_ARGUMENT]
 )
 
@@ -85,6 +87,8 @@ begin
       unmacer.keep_trashes = true
     when '--keep-macosx'
       unmacer.keep_macosx = true
+    when '--keep-apple-double'
+      unmacer.keep_apple_double = true
     when '--keep-apple-double-orphans'
       unmacer.keep_apple_double_orphans = true
     end
