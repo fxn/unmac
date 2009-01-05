@@ -71,6 +71,13 @@ class TestUnmacer < Test::Unit::TestCase
     assert read_struct.empty?    
   end
 
+  def test_keep_trashes
+    create_struct(Unmacer::TRASHES)
+    @unmacer.keep_trashes = true
+    unmac!
+    assert_equal [Unmacer::TRASHES], read_struct
+  end
+
   def test_macosx
     create_struct(Unmacer::MACOSX)
     unmac!
@@ -87,5 +94,18 @@ class TestUnmacer < Test::Unit::TestCase
     create_struct([], %w(foo.txt ._foo.txt))
     unmac!
     assert_equal %w(foo.txt), read_struct
+  end
+
+  def test_apple_double
+    create_struct([], %w(._foo.txt))
+    unmac!
+    assert read_struct.empty?
+  end
+
+  def test_assert_keep_apple_double_orphans
+    create_struct([], %w(._foo.txt))
+    @unmacer.keep_apple_double_orphans = true
+    unmac!
+    assert_equal %w(._foo.txt), read_struct    
   end
 end
