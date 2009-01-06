@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name              = 'unmac'
-  spec.version           = '0.1'
+  spec.version           = '0.2'
   spec.summary           = 'Delete spurious Mac files under a directory or volume'
   spec.homepage          = 'http://github.com/fxn/unmac/tree/master'
   spec.executables       = %w(unmac)
