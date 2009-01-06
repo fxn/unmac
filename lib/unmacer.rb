@@ -50,10 +50,6 @@ class Unmacer
 
 private
 
-  def unmac_all(dirname)
-    unmac_root_folder(dirname)
-  end
-
   def unmac_root(dirname)
     # Order is important because ".Trashes" has "._.Trashes". Otherwise,
     # "._.Trashes" could be left as an orphan.
