@@ -131,14 +131,6 @@ private
   # See http://www.westwind.com/reference/OS-X/invisibles.html.
   # See http://en.wikipedia.org/wiki/Resource_fork.
   # See http://en.wikipedia.org/wiki/AppleSingle.
-  #
-  # Given the listing of a directory in +basenames+ this method selects
-  # emulated resource forks in there.
-  #
-  # If +include_orphans+ is true any filename that start with "._" are
-  # selected. The idea is to clean up ghost entries corresponding to files
-  # that were deleted in the target volume mounted in a different OS.
-  # Otherwise we ensure the corresponding filename exists in +basenames+.
   def delete_apple_double(dirname)
     basenames = Dir.entries(dirname)
     basenames.select do |basename|
