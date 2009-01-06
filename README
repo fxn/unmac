@@ -10,7 +10,7 @@ Options:
   -f, --keep-fsevents              Do not delete Time Machine stuff
   -t, --keep-trashes               Do not delete volume trashes
   -m, --keep-macosx                Do not delete "__MACOSX" directories
-  -r, --keep-dsstore               Do not delete ".DS_Store" directories
+  -r, --keep-dsstore               Do not delete ".DS_Store" files
   -d, --keep-apple-double          Do not delete "._*" ghost files
   -o, --keep-apple-double-orphans  Delete "._foo.txt" only if "foo.txt" exists
 
