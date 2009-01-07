@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.test_files = %w(
     test/test_unmacer.rb
-    test/test_unmac.rb    
+    test/test_unmac.rb
   )
 
   spec.files = %w(

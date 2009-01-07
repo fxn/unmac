@@ -57,7 +57,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
       assert_equal %w(dummy), ARGV
-    end    
+    end
   end
 
   def test_spotlight
