@@ -76,6 +76,7 @@ private
         FileUtils.rm_r(name)
         puts "deleted #{name}" if verbose
       end
+    end
   rescue Exception => e
     $stderr.puts("could not delete #{name}: #{e.message}")
   end
