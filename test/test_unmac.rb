@@ -17,6 +17,7 @@ class TestUnmac < Test::Unit::TestCase
   def test_no_options
     unmacer = call_unmac('dummy')
     assert !unmacer.verbose
+    assert !unmacer.pretend
     assert !unmacer.keep_spotlight
     assert !unmacer.keep_fsevents
     assert !unmacer.keep_trashes
@@ -31,6 +32,7 @@ class TestUnmac < Test::Unit::TestCase
     for opt in ['--verbose', '-v']
       unmacer = call_unmac(opt, 'dummy')
       assert unmacer.verbose
+      assert !unmacer.pretend
       assert !unmacer.keep_spotlight
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
@@ -42,10 +44,27 @@ class TestUnmac < Test::Unit::TestCase
     end
   end
 
+  def test_pretend
+    for opt in ['--pretend', '-p']
+      unmacer = call_unmac(opt, 'dummy')
+      assert !unmacer.verbose
+      assert unmacer.pretend
+      assert !unmacer.keep_spotlight
+      assert !unmacer.keep_fsevents
+      assert !unmacer.keep_trashes
+      assert !unmacer.keep_macosx
+      assert !unmacer.keep_dsstore
+      assert !unmacer.keep_apple_double
+      assert !unmacer.keep_apple_double_orphans
+      assert_equal %w(dummy), ARGV
+    end    
+  end
+
   def test_spotlight
     for opt in ['--keep-spotlight', '-s']
       unmacer = call_unmac(opt, 'dummy')
       assert !unmacer.verbose
+      assert !unmacer.pretend
       assert unmacer.keep_spotlight
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
@@ -61,6 +80,7 @@ class TestUnmac < Test::Unit::TestCase
     for opt in ['--keep-fsevents', '-f']
       unmacer = call_unmac(opt, 'dummy')
       assert !unmacer.verbose
+      assert !unmacer.pretend
       assert !unmacer.keep_spotlight
       assert unmacer.keep_fsevents
       assert !unmacer.keep_trashes
@@ -76,6 +96,7 @@ class TestUnmac < Test::Unit::TestCase
     for opt in ['--keep-trashes', '-t']
       unmacer = call_unmac(opt, 'dummy')
       assert !unmacer.verbose
+      assert !unmacer.pretend
       assert !unmacer.keep_spotlight
       assert !unmacer.keep_fsevents
       assert unmacer.keep_trashes
@@ -91,6 +112,7 @@ class TestUnmac < Test::Unit::TestCase
     for opt in ['--keep-macosx', '-m']
       unmacer = call_unmac(opt, 'dummy')
       assert !unmacer.verbose
+      assert !unmacer.pretend
       assert !unmacer.keep_spotlight
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
@@ -106,6 +128,7 @@ class TestUnmac < Test::Unit::TestCase
     for opt in ['--keep-dsstore', '-r']
       unmacer = call_unmac(opt, 'dummy')
       assert !unmacer.verbose
+      assert !unmacer.pretend
       assert !unmacer.keep_spotlight
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
@@ -121,6 +144,7 @@ class TestUnmac < Test::Unit::TestCase
     for opt in ['--keep-apple-double', '-d']
       unmacer = call_unmac(opt, 'dummy')
       assert !unmacer.verbose
+      assert !unmacer.pretend
       assert !unmacer.keep_spotlight
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
@@ -136,6 +160,7 @@ class TestUnmac < Test::Unit::TestCase
     for opt in ['--keep-apple-double-orphans', '-o']
       unmacer = call_unmac(opt, 'dummy')
       assert !unmacer.verbose
+      assert !unmacer.pretend
       assert !unmacer.keep_spotlight
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
@@ -150,6 +175,7 @@ class TestUnmac < Test::Unit::TestCase
   def test_mix_1
     unmacer = call_unmac(*%w(-v -f -m -d dummy))
     assert unmacer.verbose
+    assert !unmacer.pretend
     assert !unmacer.keep_spotlight
     assert unmacer.keep_fsevents
     assert !unmacer.keep_trashes
@@ -163,6 +189,7 @@ class TestUnmac < Test::Unit::TestCase
   def test_mix_2
     unmacer = call_unmac(*%w(-s -t -r -o dummy))
     assert !unmacer.verbose
+    assert !unmacer.pretend
     assert unmacer.keep_spotlight
     assert !unmacer.keep_fsevents
     assert unmacer.keep_trashes
@@ -174,7 +201,7 @@ class TestUnmac < Test::Unit::TestCase
   end
 
   def test_help
-    buf = ""
+    buf = ''
     $> = StringIO.open(buf, 'w')
     call_unmac('-h')
     $> = $stdout
