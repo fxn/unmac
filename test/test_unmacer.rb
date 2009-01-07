@@ -1,5 +1,6 @@
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
+require 'stringio'
 require 'fileutils'
 require 'set'
 require 'unmacer'
@@ -52,6 +53,17 @@ class TestUnmacer < Test::Unit::TestCase
     create_struct
     unmac!
     assert read_struct.empty?
+  end
+
+  def test_pretend
+    dirs = [Unmacer::SPOTLIGHT, Unmacer::FSEVENTS, Unmacer::TRASHES, Unmacer::MACOSX]
+    create_struct(dirs, '._dummy')
+    buf = ''
+    $> = StringIO.new(buf, 'w')
+    @unmacer.pretend = true
+    unmac!
+    $> = $stdout
+    assert Set.new(dirs + ['._dummy']), Set.new(read_struct)
   end
 
   def test_spotlight
