@@ -64,6 +64,11 @@ class TestUnmacer < Test::Unit::TestCase
     unmac!
     $> = $stdout
     assert Set.new(dirs + ['._dummy']), Set.new(read_struct)
+    assert_match /^would delete.*\.Spotlight/, buf
+    assert_match /^would delete.*\.fsevents/, buf
+    assert_match /^would delete.*\.Trashes/, buf
+    assert_match /^would delete.*__MACOSX/, buf
+    assert_match /^would delete.*\._dummy/, buf
   end
 
   def test_spotlight
