@@ -1,6 +1,10 @@
+== 0.4 2009-01-07
+
+  * Fixed an edge case for deletions in foreign volumes from a Mac.
+
 == 0.3 2009-01-07
 
-  * Added a --pretend flag
+  * Added a --pretend flag.
 
 == 0.2 2009-01-06
 
@@ -8,4 +12,4 @@
 
 == 0.1 2009-01-06
 
-  * Initial release
+  * Initial release.
