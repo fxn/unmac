@@ -14,6 +14,7 @@ Usage:
 Options:
   -h, --help                       Print this help
   -v, --verbose                    Show processing
+  -p, --pretend                    Show what would be deleted, but don't do it
   -s, --keep-spotlight             Do not delete Spotlight data
   -f, --keep-fsevents              Do not delete Time Machine stuff
   -t, --keep-trashes               Do not delete volume trashes
@@ -64,6 +65,7 @@ end
 opts = GetoptLong.new(
   ['--help',                      '-h', GetoptLong::NO_ARGUMENT],
   ['--verbose',                   '-v', GetoptLong::NO_ARGUMENT],
+  ['--pretend',                   '-p', GetoptLong::NO_ARGUMENT]
   ['--keep-spotlight',            '-s', GetoptLong::NO_ARGUMENT],
   ['--keep-fsevents',             '-f', GetoptLong::NO_ARGUMENT],
   ['--keep-trashes',              '-t', GetoptLong::NO_ARGUMENT],
@@ -83,6 +85,8 @@ begin
       usage and exit
     when '--verbose'
       unmacer.verbose = true
+    when '--pretend'
+      unmacer.pretend = true
     when /\A--(keep-.*)/
       flag = $1.gsub('-', '_')
       unmacer.send("#{flag}=", true)
