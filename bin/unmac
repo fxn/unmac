@@ -22,7 +22,7 @@ Options:
   -r, --keep-dsstore               Do not delete ".DS_Store" files
   -d, --keep-apple-double          Do not delete "._*" ghost files
   -o, --keep-apple-double-orphans  Delete "._foo.txt" only if "foo.txt" exists
-  -i, --keep-custom-folder-icons   Delete custom folder icons
+  -i, --keep-custom-folder-icons   Do not delete custom folder icons
 
 Description:
   When a Mac copies files to volumes that have a different file system it adds
