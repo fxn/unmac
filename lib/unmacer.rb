@@ -10,13 +10,15 @@ class Unmacer
                 :keep_macosx,
                 :keep_dsstore,
                 :keep_apple_double,
-                :keep_apple_double_orphans
+                :keep_apple_double_orphans,
+                :keep_custom_folder_icons
 
   SPOTLIGHT = '.Spotlight-V100'
   FSEVENTS  = '.fseventsd'
   TRASHES   = '.Trashes'
   MACOSX    = '__MACOSX'
   DSSTORE   = '.DS_Store'
+  ICON      = "Icon\cM"
 
   def initialize
     self.verbose                   = false
@@ -28,6 +30,7 @@ class Unmacer
     self.keep_dsstore              = false
     self.keep_apple_double         = false
     self.keep_apple_double_orphans = false
+    self.keep_custom_folder_icons  = false
   end
 
   def unmac!(dirnames)
@@ -65,6 +68,7 @@ private
     delete_macosx(dirname) unless keep_macosx
     delete_dsstore(dirname) unless keep_dsstore
     delete_apple_double(dirname) unless keep_apple_double
+    delete_custom_folder_icon(dirname) unless keep_custom_folder_icons
   end
 
   def delete(parent, file_or_directory)
@@ -148,5 +152,9 @@ private
     end.each do |basename|
       delete(dirname, basename)
     end
+  end
+
+  def delete_custom_folder_icon(dirname)
+    delete(dirname, ICON)
   end
 end

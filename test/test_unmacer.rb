@@ -190,6 +190,19 @@ class TestUnmacer < Test::Unit::TestCase
     assert_equal %w(._foo.txt), read_struct
   end
 
+  def test_custom_folder_icons
+    create_struct([], Unmacer::ICON)
+    unmac!
+    assert read_struct.empty?
+  end
+
+  def test_keep_custom_folder_icons
+    create_struct([], Unmacer::ICON)
+    @unmacer.keep_custom_folder_icons = true
+    unmac!
+    assert_equal [Unmacer::ICON], read_struct
+  end
+
   def test_a_handful_of_files
     dummy  = 'dummy'
     dummy2 = File.join(dummy, 'dummy2')
@@ -208,6 +221,8 @@ class TestUnmacer < Test::Unit::TestCase
       File.join(dummy2, Unmacer::DSSTORE),
       File.join(dummy,  Unmacer::MACOSX),
       File.join(dummy2, Unmacer::MACOSX),
+      File.join(dummy,  Unmacer::ICON),
+      File.join(dummy2, Unmacer::ICON),
       'foo.txt',
       '._foo.txt',
       ghost,
