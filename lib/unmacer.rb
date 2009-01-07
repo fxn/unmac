@@ -73,7 +73,8 @@ private
       if pretend
         puts "would delete #{name}"
       else
-        FileUtils.rm_r(name)
+        # Vanilla rm_r cannot delete a directory that has AppleDoubles.
+        FileUtils.rmtree(name)
         puts "deleted #{name}" if verbose
       end
     end
