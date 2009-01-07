@@ -1,3 +1,7 @@
+== 0.6 2009-01-07
+
+  * Just fixed docs.
+
 == 0.5 2009-01-07
 
   * Added support for Icon^M files.
