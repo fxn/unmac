@@ -3,6 +3,7 @@ require 'find'
 
 class Unmacer
   attr_accessor :verbose,
+                :pretend,
                 :keep_spotlight,
                 :keep_fsevents,
                 :keep_trashes,
@@ -19,6 +20,7 @@ class Unmacer
 
   def initialize
     self.verbose                   = false
+    self.pretend                   = false
     self.keep_spotlight            = false
     self.keep_fsevents             = false
     self.keep_trashes              = false
