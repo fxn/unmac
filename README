@@ -6,6 +6,7 @@ Usage:
 Options:
   -h, --help                       Print this help
   -v, --verbose                    Show processing
+  -p, --pretend                    Show what would be deleted, but don't do it
   -s, --keep-spotlight             Do not delete Spotlight data
   -f, --keep-fsevents              Do not delete Time Machine stuff
   -t, --keep-trashes               Do not delete volume trashes
