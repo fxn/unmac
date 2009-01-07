@@ -73,6 +73,7 @@ opts = GetoptLong.new(
   ['--keep-dsstore',              '-r', GetoptLong::NO_ARGUMENT],
   ['--keep-apple-double',         '-d', GetoptLong::NO_ARGUMENT],
   ['--keep-apple-double-orphans', '-o', GetoptLong::NO_ARGUMENT],
+  ['--keep-custom-folder-icons',  '-i', GetoptLong::NO_ARGUMENT],
   ['--test',                            GetoptLong::NO_ARGUMENT]
 )
 

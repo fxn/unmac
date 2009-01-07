@@ -25,6 +25,7 @@ class TestUnmac < Test::Unit::TestCase
     assert !unmacer.keep_dsstore
     assert !unmacer.keep_apple_double
     assert !unmacer.keep_apple_double_orphans
+    assert !unmacer.keep_custom_folder_icons
     assert_equal %w(dummy), ARGV
   end
 
@@ -40,6 +41,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
+      assert !unmacer.keep_custom_folder_icons
       assert_equal %w(dummy), ARGV
     end
   end
@@ -56,6 +58,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
+      assert !unmacer.keep_custom_folder_icons
       assert_equal %w(dummy), ARGV
     end
   end
@@ -72,6 +75,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
+      assert !unmacer.keep_custom_folder_icons
       assert_equal %w(dummy), ARGV
     end
   end
@@ -88,6 +92,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
+      assert !unmacer.keep_custom_folder_icons
       assert_equal %w(dummy), ARGV
     end
   end
@@ -104,6 +109,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
+      assert !unmacer.keep_custom_folder_icons
       assert_equal %w(dummy), ARGV
     end
   end
@@ -120,6 +126,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
+      assert !unmacer.keep_custom_folder_icons
       assert_equal %w(dummy), ARGV
     end
   end
@@ -136,6 +143,7 @@ class TestUnmac < Test::Unit::TestCase
       assert unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
+      assert !unmacer.keep_custom_folder_icons
       assert_equal %w(dummy), ARGV
     end
   end
@@ -152,6 +160,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert unmacer.keep_apple_double
       assert !unmacer.keep_apple_double_orphans
+      assert !unmacer.keep_custom_folder_icons
       assert_equal %w(dummy), ARGV
     end
   end
@@ -168,12 +177,30 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
       assert unmacer.keep_apple_double_orphans
+      assert !unmacer.keep_custom_folder_icons
+      assert_equal %w(dummy), ARGV
+    end
+  end
+
+  def test_custom_folder_icons
+    for opt in ['--keep-custom-folder-icons', '-i']
+      unmacer = call_unmac(opt, 'dummy')
+      assert !unmacer.verbose
+      assert !unmacer.pretend
+      assert !unmacer.keep_spotlight
+      assert !unmacer.keep_fsevents
+      assert !unmacer.keep_trashes
+      assert !unmacer.keep_macosx
+      assert !unmacer.keep_dsstore
+      assert !unmacer.keep_apple_double
+      assert !unmacer.keep_apple_double_orphans
+      assert unmacer.keep_custom_folder_icons
       assert_equal %w(dummy), ARGV
     end
   end
 
   def test_mix_1
-    unmacer = call_unmac(*%w(-v -f -m -d dummy))
+    unmacer = call_unmac(*%w(-v -f -m -d -i dummy))
     assert unmacer.verbose
     assert !unmacer.pretend
     assert !unmacer.keep_spotlight
@@ -183,6 +210,7 @@ class TestUnmac < Test::Unit::TestCase
     assert !unmacer.keep_dsstore
     assert unmacer.keep_apple_double
     assert !unmacer.keep_apple_double_orphans
+    assert unmacer.keep_custom_folder_icons
     assert_equal %w(dummy), ARGV
   end
 
@@ -197,6 +225,7 @@ class TestUnmac < Test::Unit::TestCase
     assert unmacer.keep_dsstore
     assert !unmacer.keep_apple_double
     assert unmacer.keep_apple_double_orphans
+    assert !unmacer.keep_custom_folder_icons
     assert_equal %w(dummy), ARGV
   end
 
