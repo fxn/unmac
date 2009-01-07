@@ -65,7 +65,7 @@ end
 opts = GetoptLong.new(
   ['--help',                      '-h', GetoptLong::NO_ARGUMENT],
   ['--verbose',                   '-v', GetoptLong::NO_ARGUMENT],
-  ['--pretend',                   '-p', GetoptLong::NO_ARGUMENT]
+  ['--pretend',                   '-p', GetoptLong::NO_ARGUMENT],
   ['--keep-spotlight',            '-s', GetoptLong::NO_ARGUMENT],
   ['--keep-fsevents',             '-f', GetoptLong::NO_ARGUMENT],
   ['--keep-trashes',              '-t', GetoptLong::NO_ARGUMENT],
