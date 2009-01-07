@@ -69,11 +69,15 @@ private
 
   def delete(parent, file_or_directory)
     name = File.join(parent, file_or_directory)
-    FileUtils.rm_r(name)
-  rescue Errno::ENOENT
-    # it does not exist, fine.
-  else
-    puts "deleted #{name}" if verbose
+    if File.exists?(name)
+      if pretend
+        puts "would delete #{name}"
+      else
+        FileUtils.rm_r(name)
+        puts "deleted #{name}" if verbose
+      end
+  rescue Exception => e
+    $stderr.puts("could not delete #{name}: #{e.message}")
   end
 
   # Spotlight saves all its index-related files in the .Spotlight-V100 directory
