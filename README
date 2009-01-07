@@ -50,7 +50,7 @@ What's deleted:
       are stored in an accompaining ghost file called "._foo.txt". The pattern
       is to prepend "._" to the original file name.
     
-    * If a folder has a custom icon you get a file Icon^M (that's a hard CR).
+    * If a folder has a custom icon you get a file "Icon^M" (that ^M is a hard CR).
 
   Some stuff is only found in the root folder of volumes, unmac looks for them
   in any directory you pass as argument, but not on their subdirectories.
