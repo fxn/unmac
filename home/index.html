@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <title>unmac</title>
+  <style type="text/css" media="screen">
+    body { margin-left: 40px;}
+  </style>
+</head>
+<body>
+<h1>unmac</h1>
+<pre>
+unmac -- Delete spurious Mac files under a directory or volume
+
+Usage:
+  unmac [OPTIONS] directory ...
+
+Options:
+  -h, --help                       Print this help
+  -v, --verbose                    Show processing
+  -p, --pretend                    Show what would be deleted, but don&#x27;t do it
+  -s, --keep-spotlight             Do not delete Spotlight data
+  -f, --keep-fsevents              Do not delete Time Machine stuff
+  -t, --keep-trashes               Do not delete volume trashes
+  -m, --keep-macosx                Do not delete &quot;__MACOSX&quot; directories
+  -r, --keep-dsstore               Do not delete &quot;.DS_Store&quot; files
+  -d, --keep-apple-double          Do not delete &quot;._*&quot; ghost files
+  -o, --keep-apple-double-orphans  Delete &quot;._foo.txt&quot; only if &quot;foo.txt&quot; exists
+  -i, --keep-custom-folder-icons   Do not delete custom folder icons
+
+Description:
+  When a Mac copies files to volumes that have a different file system it adds
+  some auxiliary files that represent different kinds of metadata. This typically
+  happens with memory sticks, network drives, SD cards, etc. Mac archivers like
+  zip(1) add special files as well, like &quot;__MACOSX&quot;, you&#x27;ll see them for example
+  if you extract a Zip file like that on Windows.
+
+  The purpose of these special files is to let another Mac rebuild the metadata
+  from them, Spotlight integration, etc. But if you are not interested in these
+  features your directory or volume just gets cluttered. This utility removes
+  all those extra files.
+
+What&#x27;s deleted:
+  This is just a summary, for more detailed explanations and pointers see the
+  comments in unmacer.rb:
+
+    * Spotlight leaves a folder called &quot;.Spotlight-V100&quot; in the root directory
+      of volumes.
+
+    * Time Machine relies on a folder called &quot;.fseventsd&quot; in the root directory
+      of volumes.
+
+    * A folder called &quot;.Trashes&quot; in the root directory of volumes stores their
+      trashes. Those ones are taken into account by the Trash in the Dock.
+
+    * Some archivers create auxiliary directories called &quot;__MACOSX&quot;.
+
+    * Finder and Spotlight data related to each folder gets stored in an
+      extra file called &quot;.DS_Store&quot;.
+
+    * For each file &quot;foo.txt&quot;, its resource fork and some additional stuff
+      are stored in an accompaining ghost file called &quot;._foo.txt&quot;. The pattern
+      is to prepend &quot;._&quot; to the original file name.
+    
+    * If a folder has a custom icon you get a file &quot;Icon^M&quot; (that ^M is a hard CR).
+
+  Some stuff is only found in the root folder of volumes, unmac looks for them
+  in any directory you pass as argument, but not on their subdirectories.
+
+Installation:
+  This program is portable, it has been tested on Mac OS X, Linux, and Windows.
+  Should work at least in any other Unix.
+
+  unmac is distributed as a Ruby gem. Once you have Ruby and RubyGems installed
+  execute
+  
+    gem install unmac
+
+License:
+  See the MIT-LICENSE file included in the distribution.
+
+Copyright:
+  Copyright (C) 2009 Xavier Noria.
+</pre>
+</body>
+</html>

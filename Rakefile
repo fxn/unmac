@@ -5,3 +5,7 @@ task :test do
     ruby "-Ilib #{test}"
   end
 end
+
+task :home do
+  sh "scp home/index.html fxn@rubyforge.org:/var/www/gforge-projects/unmac/"
+end
