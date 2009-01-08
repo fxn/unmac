@@ -56,13 +56,13 @@ What's deleted:
   in any directory you pass as argument, but not on their subdirectories.
 
 Installation:
+  This program is portable, it has been tested on Mac OS X, Linux, and Windows.
+  Should work at least in any other Unix.
+
   unmac is distributed as a Ruby gem. Once you have Ruby and RubyGems installed
   execute
-
-    gem sources -a http://gems.github.com # you need this only once
-    gem install fxn-unmac
-
-  This program is portable.
+  
+    gem install unmac
 
 License:
   See the MIT-LICENSE file included in the distribution.
