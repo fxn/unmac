@@ -63,7 +63,7 @@ class TestUnmacer < Test::Unit::TestCase
     @unmacer.pretend = true
     unmac!
     $> = $stdout
-    assert Set.new(dirs + ['._dummy']), Set.new(read_struct)
+    assert_equal Set.new(dirs + ['._dummy']), Set.new(read_struct)
     assert_match /^would delete.*\.Spotlight/, buf
     assert_match /^would delete.*\.fsevents/, buf
     assert_match /^would delete.*\.Trashes/, buf
@@ -88,7 +88,7 @@ class TestUnmacer < Test::Unit::TestCase
     create_struct(Unmacer::SPOTLIGHT)
     @unmacer.keep_spotlight = true
     unmac!
-    assert [Unmacer::SPOTLIGHT], read_struct
+    assert_equal [Unmacer::SPOTLIGHT], read_struct
   end
 
   def test_fsevents
@@ -180,7 +180,7 @@ class TestUnmacer < Test::Unit::TestCase
     create_struct([], '._foo.txt')
     @unmacer.keep_apple_double = true
     unmac!
-    assert ['._foo.txt'], read_struct
+    assert_equal ['._foo.txt'], read_struct
   end
 
   def test_keep_apple_double_orphans

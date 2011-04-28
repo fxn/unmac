@@ -34,7 +34,7 @@ class Unmacer
   end
 
   def unmac!(dirnames)
-    dirnames.each do |dirname|
+    Array(dirnames).each do |dirname|
       unmac_root(dirname)
       find_skipping_root(dirname) do |f|
         unmac_folder(f) if File.directory?(f)
