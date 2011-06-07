@@ -1,11 +1,9 @@
-$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
-
 require 'stringio'
 require 'unmacer'
 require 'test/unit'
 
-UNMAC_RB    = File.join(File.dirname(__FILE__), '..', 'bin', 'unmac')
-UNMAC_SRC   = File.open(UNMAC_RB) { |f| f.read }
+UNMAC_RB  = File.join(File.dirname(__FILE__), '..', 'bin', 'unmac')
+UNMAC_SRC = File.open(UNMAC_RB) { |f| f.read }
 
 class TestUnmac < Test::Unit::TestCase
   def call_unmac(*args)
@@ -234,8 +232,8 @@ class TestUnmac < Test::Unit::TestCase
     $> = StringIO.open(buf, 'w')
     call_unmac('-h')
     $> = $stdout
-    assert_match /^unmac\b/, buf
-    assert_match /^Usage\b/, buf
+    assert_match %r{^unmac\b}, buf
+    assert_match %r{^Usage\b}, buf
     assert ARGV.empty?
   end
 end

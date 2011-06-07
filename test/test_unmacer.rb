@@ -1,5 +1,3 @@
-$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
-
 require 'stringio'
 require 'fileutils'
 require 'set'
@@ -64,11 +62,11 @@ class TestUnmacer < Test::Unit::TestCase
     unmac!
     $> = $stdout
     assert_equal Set.new(dirs + ['._dummy']), Set.new(read_struct)
-    assert_match /^would delete.*\.Spotlight/, buf
-    assert_match /^would delete.*\.fsevents/, buf
-    assert_match /^would delete.*\.Trashes/, buf
-    assert_match /^would delete.*__MACOSX/, buf
-    assert_match /^would delete.*\._dummy/, buf
+    assert_match %r{^would delete.*\.Spotlight}, buf
+    assert_match %r{^would delete.*\.fsevents}, buf
+    assert_match %r{^would delete.*\.Trashes}, buf
+    assert_match %r{^would delete.*__MACOSX}, buf
+    assert_match %r{^would delete.*\._dummy}, buf
   end
 
   def test_spotlight
