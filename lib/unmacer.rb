@@ -8,6 +8,7 @@ class Unmacer
                 :keep_fsevents,
                 :keep_trashes,
                 :keep_document_revisions,
+                :keep_mobile_backups,
                 :keep_macosx,
                 :keep_dsstore,
                 :keep_apple_double,
@@ -18,6 +19,7 @@ class Unmacer
   FSEVENTS  = '.fseventsd'
   TRASHES   = '.Trashes'
   REVISIONS = '.DocumentRevisions-V100'
+  MBACKUPS  = '.MobileBackups'
   MACOSX    = '__MACOSX'
   DSSTORE   = '.DS_Store'
   ICON      = "Icon\cM"
@@ -29,6 +31,7 @@ class Unmacer
     self.keep_fsevents             = false
     self.keep_trashes              = false
     self.keep_document_revisions   = false
+    self.keep_mobile_backups       = false
     self.keep_macosx               = false
     self.keep_dsstore              = false
     self.keep_apple_double         = false
@@ -66,6 +69,7 @@ private
     delete_fsevents(dirname) unless keep_fsevents
     delete_trashes(dirname) unless keep_trashes
     delete_document_revisions(dirname) unless keep_document_revisions
+    delete_mobile_backups(dirname) unless keep_mobile_backups
   end
 
   def unmac_folder(dirname)
@@ -122,6 +126,13 @@ private
   # See http://arstechnica.com/apple/reviews/2011/07/mac-os-x-10-7.ars/14#versioning-internals.
   def delete_document_revisions(dirname)
     delete(dirname, REVISIONS)
+  end
+
+  # Mobile backups are stored in the /.MobileBackups folder. (New in Lion.)
+  #
+  # See http://arstechnica.com/apple/reviews/2011/07/mac-os-x-10-7.ars/18#mobile-time-machine.
+  def delete_mobile_backups(dirname)
+    delete(dirname, MBACKUPS)
   end
 
   # Apple's builtin Zip archiver stores some metadata in a directory called

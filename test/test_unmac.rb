@@ -20,6 +20,7 @@ class TestUnmac < Test::Unit::TestCase
     assert !unmacer.keep_fsevents
     assert !unmacer.keep_trashes
     assert !unmacer.keep_document_revisions
+    assert !unmacer.keep_mobile_backups
     assert !unmacer.keep_macosx
     assert !unmacer.keep_dsstore
     assert !unmacer.keep_apple_double
@@ -37,6 +38,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
       assert !unmacer.keep_document_revisions
+      assert !unmacer.keep_mobile_backups
       assert !unmacer.keep_macosx
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
@@ -55,6 +57,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
       assert !unmacer.keep_document_revisions
+      assert !unmacer.keep_mobile_backups
       assert !unmacer.keep_macosx
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
@@ -73,6 +76,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
       assert !unmacer.keep_document_revisions
+      assert !unmacer.keep_mobile_backups
       assert !unmacer.keep_macosx
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
@@ -91,6 +95,7 @@ class TestUnmac < Test::Unit::TestCase
       assert unmacer.keep_fsevents
       assert !unmacer.keep_trashes
       assert !unmacer.keep_document_revisions
+      assert !unmacer.keep_mobile_backups
       assert !unmacer.keep_macosx
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
@@ -109,6 +114,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_fsevents
       assert unmacer.keep_trashes
       assert !unmacer.keep_document_revisions
+      assert !unmacer.keep_mobile_backups
       assert !unmacer.keep_macosx
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
@@ -127,6 +133,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
       assert unmacer.keep_document_revisions
+      assert !unmacer.keep_mobile_backups
       assert !unmacer.keep_macosx
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
@@ -145,6 +152,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
       assert !unmacer.keep_document_revisions
+      assert !unmacer.keep_mobile_backups
       assert unmacer.keep_macosx
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
@@ -163,6 +171,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
       assert !unmacer.keep_document_revisions
+      assert !unmacer.keep_mobile_backups
       assert !unmacer.keep_macosx
       assert unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
@@ -181,6 +190,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
       assert !unmacer.keep_document_revisions
+      assert !unmacer.keep_mobile_backups
       assert !unmacer.keep_macosx
       assert !unmacer.keep_dsstore
       assert unmacer.keep_apple_double
@@ -199,6 +209,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
       assert !unmacer.keep_document_revisions
+      assert !unmacer.keep_mobile_backups
       assert !unmacer.keep_macosx
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
@@ -217,6 +228,7 @@ class TestUnmac < Test::Unit::TestCase
       assert !unmacer.keep_fsevents
       assert !unmacer.keep_trashes
       assert !unmacer.keep_document_revisions
+      assert !unmacer.keep_mobile_backups
       assert !unmacer.keep_macosx
       assert !unmacer.keep_dsstore
       assert !unmacer.keep_apple_double
@@ -234,6 +246,7 @@ class TestUnmac < Test::Unit::TestCase
     assert unmacer.keep_fsevents
     assert !unmacer.keep_trashes
     assert !unmacer.keep_document_revisions
+    assert !unmacer.keep_mobile_backups
     assert unmacer.keep_macosx
     assert !unmacer.keep_dsstore
     assert unmacer.keep_apple_double
@@ -250,6 +263,7 @@ class TestUnmac < Test::Unit::TestCase
     assert !unmacer.keep_fsevents
     assert unmacer.keep_trashes
     assert !unmacer.keep_document_revisions
+    assert !unmacer.keep_mobile_backups
     assert !unmacer.keep_macosx
     assert unmacer.keep_dsstore
     assert !unmacer.keep_apple_double

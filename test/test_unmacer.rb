@@ -121,6 +121,12 @@ class TestUnmacer < Test::Unit::TestCase
     assert read_struct.empty?
   end
 
+  def test_mobile_backups
+    create_struct(Unmacer::MBACKUPS)
+    unmac!
+    assert read_struct.empty?
+  end
+
   def test_trashes_ignored_if_not_in_root
     fake = File.join('dummy', Unmacer::TRASHES)
     create_struct(fake)
