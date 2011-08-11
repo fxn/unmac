@@ -22,7 +22,7 @@ Description:
   When a Mac copies files to volumes that have a different file system it adds
   some auxiliary files that represent different kinds of metadata. This typically
   happens with memory sticks, network drives, SD cards, etc. Mac archivers like
-  zip(1) add special files as well, like "#{Unmacer::MACOSX}", you'll see them
+  zip(1) add special files as well, like "__MACOSX", you'll see them
   for example if you extract a Zip file like that on Windows.
 
   The purpose of these special files is to let another Mac rebuild the metadata
@@ -34,23 +34,23 @@ What's deleted:
   This is just a summary, for more detailed explanations and pointers see the
   comments in unmacer.rb:
 
-    * Spotlight leaves a folder called "#{Unmacer::SPOTLIGHT}" in the root directory
+    * Spotlight leaves a folder called ".Spotlight-V100" in the root directory
       of volumes.
 
-    * Time Machine relies on a folder called "#{Unmacer::FSEVENTS}" in the root directory
+    * Time Machine relies on a folder called ".fseventsd" in the root directory
       of volumes.
 
-    * A folder called "#{Unmacer::TRASHES}" in the root directory of volumes stores their
+    * A folder called ".Trashes" in the root directory of volumes stores their
       trashes. Those ones are taken into account by the Trash in the Dock.
 
     * Document revisions are stored in the /.DocumentRevisions-V100 folder. (New in Lion.)
 
     * Mobile backups are stored in the /.MobileBackups folder. (New in Lion.)
 
-    * Some archivers create auxiliary directories called "#{Unmacer::MACOSX}".
+    * Some archivers create auxiliary directories called "__MACOSX".
 
     * Finder and Spotlight data related to each folder gets stored in an
-      extra file called "#{Unmacer::DSSTORE}".
+      extra file called ".DS_Store".
 
     * For each file "foo.txt", its resource fork and some additional stuff
       are stored in an accompaining ghost file called "._foo.txt". The pattern
