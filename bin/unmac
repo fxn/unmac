@@ -51,9 +51,11 @@ What's deleted:
     * A folder called "#{Unmacer::TRASHES}" in the root directory of volumes stores their
       trashes. Those ones are taken into account by the Trash in the Dock.
 
-    * Document revisions are stored in the /.DocumentRevisions-V100 folder. (New in Lion.)
+    * Document revisions are stored on a folder called #{Unmacer::REVISIONS}
+      in the root directory. (New in Lion.)
 
-    * Mobile backups are stored in the /.MobileBackups folder. (New in Lion.)
+    * Mobile backups are stored on a folder called #{Unmacer::MBACKUPS} in the root
+      directory. (New in Lion.)
 
     * Some archivers create auxiliary directories called "#{Unmacer::MACOSX}".
 
@@ -106,7 +108,11 @@ begin
       test = true
     end
   end
-  unmacer.unmac!(ARGV) unless test
+  if ARGV.empty?
+    usage and exit
+  else
+    unmacer.unmac!(ARGV) unless test
+  end
 rescue GetoptLong::InvalidOption
   usage and exit 1
 end

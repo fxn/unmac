@@ -43,9 +43,11 @@ What's deleted:
     * A folder called ".Trashes" in the root directory of volumes stores their
       trashes. Those ones are taken into account by the Trash in the Dock.
 
-    * Document revisions are stored in the /.DocumentRevisions-V100 folder. (New in Lion.)
+    * Document revisions are stored on a folder called .DocumentRevisions-V100
+      in the root directory. (New in Lion.)
 
-    * Mobile backups are stored in the /.MobileBackups folder. (New in Lion.)
+    * Mobile backups are stored on a folder called .MobileBackups in the root
+      directory. (New in Lion.)
 
     * Some archivers create auxiliary directories called "__MACOSX".
 

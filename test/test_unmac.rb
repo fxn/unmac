@@ -281,4 +281,13 @@ class TestUnmac < Test::Unit::TestCase
     assert_match %r{^Usage\b}, buf
     assert ARGV.empty?
   end
+
+  def test_no_directory
+    buf = ''
+    $> = StringIO.open(buf, 'w')
+    call_unmac
+    $> = $stdout
+    assert_match %r{^unmac\b}, buf
+    assert_match %r{^Usage\b}, buf
+  end
 end

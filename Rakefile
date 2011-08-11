@@ -7,6 +7,6 @@ Rake::TestTask.new do |t|
   t.verbose = true
 end
 
-task :home do
-  sh "scp home/index.html fxn@rubyforge.org:/var/www/gforge-projects/unmac/"
+task :readme do
+  system "ruby -Ilib bin/unmac > README"
 end
