@@ -7,6 +7,7 @@ class Unmacer
                 :keep_spotlight,
                 :keep_fsevents,
                 :keep_trashes,
+                :keep_document_revisions,
                 :keep_macosx,
                 :keep_dsstore,
                 :keep_apple_double,
@@ -16,6 +17,7 @@ class Unmacer
   SPOTLIGHT = '.Spotlight-V100'
   FSEVENTS  = '.fseventsd'
   TRASHES   = '.Trashes'
+  REVISIONS = '.DocumentRevisions-V100'
   MACOSX    = '__MACOSX'
   DSSTORE   = '.DS_Store'
   ICON      = "Icon\cM"
@@ -26,6 +28,7 @@ class Unmacer
     self.keep_spotlight            = false
     self.keep_fsevents             = false
     self.keep_trashes              = false
+    self.keep_document_revisions   = false
     self.keep_macosx               = false
     self.keep_dsstore              = false
     self.keep_apple_double         = false
@@ -62,6 +65,7 @@ private
     delete_spotlight(dirname) unless keep_spotlight
     delete_fsevents(dirname) unless keep_fsevents
     delete_trashes(dirname) unless keep_trashes
+    delete_document_revisions(dirname) unless keep_document_revisions
   end
 
   def unmac_folder(dirname)
@@ -110,6 +114,14 @@ private
   # See http://discussions.apple.com/thread.jspa?messageID=1145130.
   def delete_trashes(dirname)
     delete(dirname, TRASHES)
+  end
+
+  # Document revisions are stored in the /.DocumentRevisions-V100 folder, within
+  # SQLite databases. (New in Lion.)
+  #
+  # See http://arstechnica.com/apple/reviews/2011/07/mac-os-x-10-7.ars/14#versioning-internals.
+  def delete_document_revisions(dirname)
+    delete(dirname, REVISIONS)
   end
 
   # Apple's builtin Zip archiver stores some metadata in a directory called

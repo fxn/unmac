@@ -18,6 +18,7 @@ Options:
   -s, --keep-spotlight             Do not delete Spotlight data
   -f, --keep-fsevents              Do not delete Time Machine stuff
   -t, --keep-trashes               Do not delete volume trashes
+  -c, --keep-document-revisions    Do not delete document revisions
   -m, --keep-macosx                Do not delete "__MACOSX" directories
   -r, --keep-dsstore               Do not delete ".DS_Store" files
   -d, --keep-apple-double          Do not delete "._*" ghost files
@@ -49,6 +50,8 @@ What's deleted:
     * A folder called "#{Unmacer::TRASHES}" in the root directory of volumes stores their
       trashes. Those ones are taken into account by the Trash in the Dock.
 
+    * Document revisions are stored in the /.DocumentRevisions-V100 folder. (New in Lion.)
+
     * Some archivers create auxiliary directories called "#{Unmacer::MACOSX}".
 
     * Finder and Spotlight data related to each folder gets stored in an
@@ -72,6 +75,7 @@ opts = GetoptLong.new(
   ['--keep-spotlight',            '-s', GetoptLong::NO_ARGUMENT],
   ['--keep-fsevents',             '-f', GetoptLong::NO_ARGUMENT],
   ['--keep-trashes',              '-t', GetoptLong::NO_ARGUMENT],
+  ['--keep-document-revisions',   '-c', GetoptLong::NO_ARGUMENT],
   ['--keep-macosx',               '-m', GetoptLong::NO_ARGUMENT],
   ['--keep-dsstore',              '-r', GetoptLong::NO_ARGUMENT],
   ['--keep-apple-double',         '-d', GetoptLong::NO_ARGUMENT],
